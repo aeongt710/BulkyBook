@@ -28,6 +28,7 @@ namespace BulkyBookWebApp.Controllers
             {
                 _db.Add(category);
                 _db.SaveChanges();
+                TempData["success"] = "Category Edited Successfully!";
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -54,7 +55,7 @@ namespace BulkyBookWebApp.Controllers
             {
                 _db.Categories.Update(category);
                 _db.SaveChanges();
-                TempData["success"] = "Category Edited Successfully!";
+                TempData["warning"] = "Category Edited Successfully!";
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -84,6 +85,7 @@ namespace BulkyBookWebApp.Controllers
             {
                 _db.Categories.Remove(category);
                 _db.SaveChanges();
+                TempData["warning"] = "Category Deleted Successfully!";
                 return RedirectToAction(nameof(Index), "Category");
             }
             return NotFound();
