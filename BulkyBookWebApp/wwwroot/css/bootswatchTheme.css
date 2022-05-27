@@ -81,6 +81,8 @@
 
 body {
     margin: 0;
+    /*Changes*/
+    margin-bottom:60px;
     font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);

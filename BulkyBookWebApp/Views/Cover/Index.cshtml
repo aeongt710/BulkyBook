@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Category>
+﻿@using BukbyBook.Models
+@model IEnumerable<Cover>
 @{
     ViewData["Title"] = "Index";
 }
@@ -8,12 +9,12 @@
     <div class="container pt-3 pb-3">
         <div class="row">
             <div class="col-6">
-                <h1>Index Category</h1>
+                <h1>Index Cover</h1>
             </div>
             <div class="col-6 text-end">
 
-                <a asp-action="Create" asp-controller="Category" class="btn btn-outline-dark">
-                    <i class="bi bi-plus-circle"></i>&nbsp;Add New Category
+                <a asp-action="Create" asp-controller="Cover" class="btn btn-outline-dark">
+                    <i class="bi bi-plus-circle"></i>&nbsp;Add New Cover
                 </a>
             </div>
 
@@ -24,8 +25,6 @@
         <thead>
             <tr>
                 <th width="25%" scope="col">Name</th>
-                <th width="10%" scope="col">Order</th>
-                <th width="30%" scope="col">Date Created</th>
                 <th scope="col">Operations</th>
             </tr>
         </thead>
@@ -34,12 +33,10 @@
             {
                 <tr class="table-light">
                     <th class="align-middle">@item.Name</th>
-                    <td class="align-middle ">@item.DisplayOrder</td>
-                    <td class="align-middle">@item.CreatedDateTime</td>
                     <td class="align-middle">
-                        <a asp-action="Edit" asp-route-Id ="@item.Id" asp-controller="Category" class="btn-sm btn btn-outline-warning">
+                        <a asp-action="Edit" asp-route-Id ="@item.Id" asp-controller="Cover" class="btn-sm btn btn-outline-warning">
                             <i class="bi bi-pencil-square"></i>&nbsp;Edit</a>
-                        <a asp-action="Delete" asp-route-Id ="@item.Id" asp-controller="Category" class="btn-sm btn btn-outline-danger">
+                        <a asp-action="Delete" asp-route-Id ="@item.Id" asp-controller="Cover" class="btn-sm btn btn-outline-danger">
                             <i class="bi bi-trash2"></i>&nbsp;Delete</a>
                     </td>
                 </tr>

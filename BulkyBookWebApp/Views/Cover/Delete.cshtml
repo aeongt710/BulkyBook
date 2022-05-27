@@ -1,0 +1,34 @@
+﻿@using BukbyBook.Models
+@model Cover
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="mt-3 p-3 border">
+
+<form method="post" asp-action="Delete" asp-controller="Cover">
+    <input asp-for="Id" hidden/>
+    <div class="row">
+        <h1>Delete Cover</h1>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-floating pb-3 col-4">
+        <input asp-for="Name" disabled class="form-control" id="floatingName" placeholder="name@example.com">
+        <label asp-for="Name" for="floatingName"></label>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div>
+        <input type="submit" value="Delete" class="btn btn-outline-danger px-5 " />
+        <a asp-action="Index" asp-controller="Cover" class="btn btn-outline-info px-2">Go Back</a>
+    </div>
+</form>
+</div>
+
+
+@*@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}*@

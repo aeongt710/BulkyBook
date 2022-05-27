@@ -1,0 +1,31 @@
+﻿@using BukbyBook.Models
+@model Cover
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="mt-3 p-3 border">
+
+    <form method="post">
+        <div class="row">
+            <h1>Create Cover</h1>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-floating pb-3 col-4">
+            <input asp-for="Name" class="form-control" id="floatingName" placeholder="name@example.com">
+            <label asp-for="Name" for="floatingName"></label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <input type="submit" value="Create" class="btn btn-outline-success px-5 " />
+            <a asp-action="Index" asp-controller="Cover" class="btn btn-outline-info px-2">Go Back</a>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+    }
+}
