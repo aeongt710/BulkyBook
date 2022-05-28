@@ -15,10 +15,13 @@ namespace BulkyBook.DataAccess.Repository
             _dbContext = dbContext;
             ICategoryRepository = new CategoryRepository(_dbContext);
             ICoverRepository = new CoverRepository(_dbContext);
+            IProductRepository = new ProductRepository(_dbContext);
         }
         public ICategoryRepository ICategoryRepository { get; private set; }
 
         public ICoverRepository ICoverRepository { get; private set; }
+
+        public IProductRepository IProductRepository { get; private set; }
 
         public void Save()
         {
