@@ -3,15 +3,18 @@ using BukbyBook.Models.ViewModels;
 using BulkyBook.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace BulkyBookWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        public readonly IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        public ProductController(IUnitOfWork unitOfWork, IHostingEnvironment hostingEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _hostingEnvironment = hostingEnvironment;
         }
         public IActionResult Index()
         {
@@ -53,16 +56,30 @@ namespace BulkyBookWebApp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Product product)
+        public IActionResult Upsert(ProductVM productVm,IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.IProductRepository.Update(product);
+                string rootPath = _hostingEnvironment.WebRootPath;
+                if(formFile != null)
+                {
+                    string filename = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(rootPath, @"img\products");
+                    var extension = Path.GetExtension(formFile.FileName);
+
+                    using (var fileStream = new FileStream (Path.Combine(uploads,filename+extension),FileMode.Create))
+                    {
+                        formFile.CopyTo(fileStream);
+                    }
+                    productVm.Product.ImgSrc = @"img\products\" + filename + extension;
+                }
+
+                _unitOfWork.IProductRepository.Update(productVm.Product);
                 _unitOfWork.Save();
-                TempData["warning"] = "Cover Updated Successfully!";
+                TempData["warning"] = "Product Upserted Successfully!";
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(productVm);
         }
         public IActionResult Delete(int? Id)
         {

@@ -53,8 +53,8 @@
                 <span asp-validation-for="Product.Price100" class="text-danger"></span>
             </div>
             <div class="form-floating pb-3 col-12">
-                <input type="file" class="form-" id="floatingName imgSrc" placeholder="name@example.com">
-                <label for="floatingName" >ImgSrc</label>
+                <input type="file" class="form-control" name="formFile" id="floatingSrc" placeholder="name@example.com">
+                <label for="floatingSrc">ImgSrc</label>
                 @*<span asp-validation-for="Product.Price100" class="text-danger"></span>*@
             </div>
             <div class="form-floating pb-3 col-6">
@@ -75,25 +75,38 @@
         <div>
             @if (Model.Product.Id == 0)
             {
-                <input type="submit" value="Create" onclick="return validateImg" class="btn btn-outline-warning px-5 " />
-            }else{
-                <input type="submit" value="Update" class="btn btn-outline-warning px-5 " />
+                <input type="submit" value="Create" onclick="return validateImg()" class="btn btn-outline-warning px-5 " />
             }
             
+            else
+            
+            {
+                <input type="submit" value="Update" class="btn btn-outline-warning px-5 " />
+            }
+
             <a asp-action="Index" asp-controller="Product" asp-area="Admin" class="btn btn-outline-info px-2">Go Back</a>
         </div>
     </form>
 </div>
-
+<script type="text/javascript">
+            function validateImg()
+            {
+                if(document.getElementById('floatingSrc').value=="")
+                {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'Please Upload Image!',
+                    });
+                    return false;
+                }
+                return true;
+        }
+</script>
 
 @section Scripts{
     @{
     <partial name="_ValidationScriptsPartial" />
     }
-    <script >
-    function validateImg()
-    {
-        if(doc)
-    }
-    </script>
+
 }
